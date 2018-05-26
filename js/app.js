@@ -4,9 +4,11 @@
 // Enemies our player must avoid
 
 class Enemy {
-    constructor (x=340, y=45, speed) {
+    constructor (x=340, y=45, speed, h=60, w=60) {
         this.x = x;
         this.y = y;
+        this.w = w;
+        this.h = h;
         this.speed = speed;
         this.sprite = 'images/enemy-bug.png';
     }
@@ -18,9 +20,12 @@ class Enemy {
     update(dt){
         this.speed = 300;
         this.x += this.speed * dt;
-        if (this.x >=400) { this.x = -10 }
-    }
+        if (this.x >=400) { this.x = -10 };
+        if (player.x < this.x + this.w  && player.x + player.w  > this.x &&
+            player.y < this.y + this.h && player.y + player.h > this.y)
+            {player.reset()}
 
+    }
 }
 
 let enemy = new Enemy;
@@ -62,9 +67,11 @@ class Enemy {
 
 
 class Player {
-        constructor(x=2, y=1, speed=423) {
+        constructor(x=2, y=1, speed=423, w=60, h=60) {
           this.x = x;
           this.y = y;
+          this.w = w;
+          this.h = h;
           this.speed = speed;
           this.sprite = 'images/char-boy.png';
         }
@@ -82,6 +89,10 @@ class Player {
     // all computers.
         } 
 
+        reset() {
+            this.x = 0;
+            this.y = 370;
+        }
 
     handleInput(keyPressed) {
         if (keyPressed == 'left') {
@@ -118,7 +129,6 @@ class Player {
 
 // Now instantiate your objects.
 let player = new Player(0,370);
-
 
 
 // This listens for key presses and sends the keys to your
