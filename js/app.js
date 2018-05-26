@@ -22,7 +22,8 @@ class Enemy {
         if (this.x >=400) { this.x = -10 };
         if (player.x < this.x + this.w  && player.x + player.w  > this.x && // Explanation from http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
             player.y < this.y + this.h && player.y + player.h > this.y)
-            {player.reset();
+            {
+                gameReset();
             }    
 
     }
@@ -101,6 +102,7 @@ function gameReset() {
 }
 
 
+gameReset();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -111,6 +113,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
