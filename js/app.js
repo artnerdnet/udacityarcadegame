@@ -4,12 +4,12 @@
 // Enemies our player must avoid
 
 class Enemy {
-    constructor (x=340, y=45, speed, h=60, w=60) {
+    constructor (x=340, h=60, w=60) {
         this.x = x;
-        this.y = y;
+        this.y = yPositions[Math.floor(Math.random() * yPositions.length)];;
         this.w = w;
         this.h = h;
-        this.speed = speed;
+        this.speed = Math.random() * (500 - 100) + 100;
         this.sprite = 'images/enemy-bug.png';
     }
 
@@ -18,53 +18,19 @@ class Enemy {
     }
 
     update(dt){
-        this.speed = 300;
         this.x += this.speed * dt;
         if (this.x >=400) { this.x = -10 };
-        if (player.x < this.x + this.w  && player.x + player.w  > this.x &&
+        if (player.x < this.x + this.w  && player.x + player.w  > this.x && // Explanation from http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
             player.y < this.y + this.h && player.y + player.h > this.y)
             {player.reset()}
 
     }
 }
 
-let enemy = new Enemy;
-
+let yPositions = [45, 128, 211]
 let allEnemies = [];
 
-allEnemies.push(enemy);
-
-/*
-class Enemy {
-        constructor(x=1, y=2, speed) {
-          this.x = x;
-          this.y = y;
-          this.speed = speed;
-          this.sprite = 'images/enemy-bug.png';
-
-        }
-        render() { // Draw the enemy on the screen, required method for game
-            ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        }
-        update(dt) {
-            this.speed = 100;
-            this.x += this.speed * dt;
-            if (this.x >= 400) {
-                this.x= 400;
-            }
-           // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-        } 
-      }
-*/
-
-
-
-
-
-
-
+allEnemies.push(new Enemy);
 
 class Player {
         constructor(x=2, y=1, speed=423, w=60, h=60) {
