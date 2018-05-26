@@ -22,13 +22,13 @@ class Enemy {
         if (this.x >=400) { this.x = -10 };
         if (player.x < this.x + this.w  && player.x + player.w  > this.x && // Explanation from http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
             player.y < this.y + this.h && player.y + player.h > this.y)
-            {player.reset()}    
+            {player.reset();
+            }    
 
     }
 }
 
 let yPositions = [45, 128, 211]
-let allEnemies = [];
 
 class Player {
         constructor(x=2, y=1, speed=423, w=60, h=60) {
@@ -36,7 +36,7 @@ class Player {
           this.y = y;
           this.w = w;
           this.h = h;
-          this.speed = speed;
+          this.speed = (100 + Math.floor(Math.random())) * 10;
           this.sprite = 'images/char-boy.png';
         }
 
@@ -45,7 +45,7 @@ class Player {
         }
 
         update(dt) {
-            
+    
            // dt = this.x * this.speed;
            // this.speed = dt * this.x; // not working, how to calculate?
            // You should multiply any movement by the dt parameter
@@ -56,14 +56,6 @@ class Player {
         reset() {
             this.x = 0;
             this.y = 370;
-            
-            for (let i = 0; i < (Math.floor(Math.random() * 5) +1); i++) { // creates enemies randomly
-                let enemy = new Enemy;
-                allEnemies.push(enemy);
-            }
-
-            
-
         }
 
     handleInput(keyPressed) {
@@ -74,8 +66,9 @@ class Player {
             }
         } else if (keyPressed == 'up') {
             this.y = this.y -= 83;
-            if (this.y <= 0) { 
-                this.y= this.y % 83;
+            if (this.y <= -10) { 
+                //this.y= this.y % 83;
+                gameReset();
             }
         } else if (keyPressed == 'right') {
             this.x = this.x += 101;
@@ -87,12 +80,10 @@ class Player {
             if (this.y >= 400) {
                 this.y= 370;
             }
-        }
+        } 
     }
 
 }
-
-
 
     
 // Now write your own player class
@@ -101,8 +92,14 @@ class Player {
 
 // Now instantiate your objects.
 let player = new Player(0,370);
+allEnemies = [];
 
-window.onload = player.reset();
+function gameReset() {
+    allEnemies = [];
+    player.reset();
+    allEnemies.push(new Enemy(), new Enemy());
+}
+
 
 
 // This listens for key presses and sends the keys to your
