@@ -4,6 +4,33 @@
 // Enemies our player must avoid
 
 class Enemy {
+    constructor (x=340, y=45, speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.sprite = 'images/enemy-bug.png';
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    update(dt){
+        this.speed = 300;
+        this.x += this.speed * dt;
+        if (this.x >=400) { this.x = -10 }
+    }
+
+}
+
+let enemy = new Enemy;
+
+let allEnemies = [];
+
+allEnemies.push(enemy);
+
+/*
+class Enemy {
         constructor(x=1, y=2, speed) {
           this.x = x;
           this.y = y;
@@ -15,15 +42,27 @@ class Enemy {
             ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
         update(dt) {
-            speed = this.x * dt;
+            this.speed = 100;
+            this.x += this.speed * dt;
+            if (this.x >= 400) {
+                this.x= 400;
+            }
            // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
         } 
       }
+*/
+
+
+
+
+
+
+
 
 class Player {
-        constructor(x=2, y=1, speed) {
+        constructor(x=2, y=1, speed=423) {
           this.x = x;
           this.y = y;
           this.speed = speed;
@@ -36,6 +75,8 @@ class Player {
 
         update(dt) {
             
+           // dt = this.x * this.speed;
+           // this.speed = dt * this.x; // not working, how to calculate?
            // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -43,7 +84,6 @@ class Player {
 
 
     handleInput(keyPressed) {
-
         if (keyPressed == 'left') {
             this.x = this.x -= 101; 
             if (this.x <= 0) {
@@ -65,7 +105,6 @@ class Player {
                 this.y= 370;
             }
         }
-
     }
 
 }
@@ -78,14 +117,8 @@ class Player {
 // a handleInput() method.
 
 // Now instantiate your objects.
-let player = new Player(100,204);
-let enemy = new Enemy(200,300); 
+let player = new Player(0,370);
 
-allEnemies = []
-/* this for the enemies inside the arrays, for reset and for lvl up
-allEnemies.push(
-
-)*/ 
 
 
 // This listens for key presses and sends the keys to your
