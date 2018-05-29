@@ -46,12 +46,6 @@ class Player {
         }
 
         update(dt) {
-    
-           // dt = this.x * this.speed;
-           // this.speed = dt * this.x; // not working, how to calculate?
-           // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
         } 
 
         reset() {
@@ -98,7 +92,9 @@ allEnemies = [];
 function gameReset() {
     allEnemies = [];
     player.reset();
-    allEnemies.push(new Enemy(), new Enemy());
+    allEnemies.push(for(var i=0;i<3;i++){
+    var enemy=new Enemy(-300,40+i*90);
+});
 }
 
 
