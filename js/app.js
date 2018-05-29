@@ -45,9 +45,6 @@ class Player {
             ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
 
-        update(dt) {
-        } 
-
         reset() {
             this.x = 0;
             this.y = 370;
