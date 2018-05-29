@@ -89,9 +89,7 @@ allEnemies = [];
 function gameReset() {
     allEnemies = [];
     player.reset();
-    allEnemies.push(for(var i=0;i<3;i++){
-    var enemy=new Enemy(-300,40+i*90);
-});
+    allEnemies.push(new Enemy(), new Enemy());
 }
 
 
